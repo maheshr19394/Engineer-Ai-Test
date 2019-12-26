@@ -1,0 +1,30 @@
+<p-table [value]="Result" #dt [globalFilterFields]="['title']">
+    <!-- Search Filter In Table By title -->
+    <ng-template pTemplate="caption">
+        <div style="text-align: right">
+            <input type="text" pInputText size="50" placeholder="Search the table by title"
+                (input)="dt.filterGlobal($event.target.value, 'contains')" style="height:35px;padding-left: 25px;">
+        </div>
+    </ng-template>
+    <!-- Get Url Details Display In Table -->
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Title</th>
+            <th colspan="2">Url</th>
+            <th>Created_At</th>
+            <th>Author </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-Results>
+        <tr (click)="RowData(Results)">
+            <td>{{Results.title}}</td>
+            <td colspan="2">{{Results.url}}</td>
+            <td>{{Results.created_at}}</td>
+            <td>{{Results.author}}</td>
+        </tr>
+    </ng-template>
+</p-table>
+<!-- Model Popup Click Row Details Display -->
+<p-dialog header="Model Popup Row In The Table" [(visible)]="display" modal="true" [dismissableMask]="true">
+    {{Modeldata}}
+</p-dialog>
